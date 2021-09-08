@@ -4,7 +4,7 @@ import {sessionService} from "redux-react-session";
 
 export const loginUser = (credentials, history, setFieldError, setSubmitting) => {
     //Make checks and get some data
-    axios.post("https://whispering-headland-00232.herokuapp.com/user/signin" , credentials,
+    axios.post("https://whispering-headland-00232.herokuapp.com/user/signin" ,
     credentials,
     {
         headers: {
