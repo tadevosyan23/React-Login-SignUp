@@ -1,8 +1,19 @@
 import React from "react";
-import {StyledSubtitle, StyledTitle, Avatar, StyledButton} from "../components/Styles";
+import {StyledSubtitle, StyledTitle, Avatar, StyledButton, ButtonGroup} from "../components/Styles";
 import Logo from './../assets/logo.png'
 
 const Home = () => {
+    const [users, setUsers] = React.useState([]);
+    const f = async () => {
+        const res = await fetch("https://reqres.in/api/register");
+        const json = await res.json();
+        setUsers(json.data);
+    };
+    React.useEffect(() => {
+        f();
+    }, []);
+
+    console.log(users)
     return (
         <div>
             <div style={{
@@ -17,14 +28,17 @@ const Home = () => {
             }} >
                 <Avatar image={Logo} />
             </div>
+
             <StyledTitle size={65} >
-                Welcome to TTPC
+                React/Redux
             </StyledTitle>
             <StyledSubtitle size={27} >
-               Feel free to explore our page
+                React Login System with Redux, Formik | Backend API Connection
             </StyledSubtitle>
-            <StyledButton to='/login' >Login</StyledButton>
-            <StyledButton to='/signup' >Login</StyledButton>
+            <ButtonGroup>
+                <StyledButton to="/login" >Login</StyledButton>
+                <StyledButton to="/signup" >Signup</StyledButton>
+            </ButtonGroup>
         </div>
     )
 }
