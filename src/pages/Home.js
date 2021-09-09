@@ -3,17 +3,6 @@ import {StyledSubtitle, StyledTitle, Avatar, StyledButton, ButtonGroup} from "..
 import Logo from './../assets/logo.png'
 
 const Home = () => {
-    const [users, setUsers] = React.useState([]);
-    const f = async () => {
-        const res = await fetch("https://reqres.in/api/register");
-        const json = await res.json();
-        setUsers(json.data);
-    };
-    React.useEffect(() => {
-        f();
-    }, []);
-
-    console.log(users)
     return (
         <div>
             <div style={{
@@ -33,7 +22,7 @@ const Home = () => {
                 React/Redux
             </StyledTitle>
             <StyledSubtitle size={27} >
-                React Login System with Redux, Formik | Backend API Connection
+                | React Login System with Redux, Formik |
             </StyledSubtitle>
             <ButtonGroup>
                 <StyledButton to="/login" >Login</StyledButton>

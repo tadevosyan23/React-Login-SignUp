@@ -1,5 +1,5 @@
 import React from 'react'
-import {ErrorMessage, useField} from "formik";
+import {useField} from "formik";
 import {ErrorMsg, StyledIcon, StyledLabel, StyledTextInput} from "./Styles";
 
 //Eye for Password

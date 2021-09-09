@@ -12,30 +12,39 @@ import  {
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import Dashboard from "./pages/Dashboard";
+// auth & redux
+import AuthRoute from "./components/AuthRoute";
+import BasicRoute from "./components/BasicRoute";
+import {connect} from "react-redux";
 
 
-
-function App() {
+function App({checked}) {
   return (
       <Router>
+      {checked &&
         <StyledContainer>
             <Switch>
-                <Route path="/signup">
+                <BasicRoute path="/signup">
                     <Signup />
-                </Route>
-                <Route path="/login">
+                </BasicRoute>
+                <BasicRoute path="/login">
                     <Login />
-                </Route>
-                <Route path="/dashboard">
+                </BasicRoute>
+                <AuthRoute path="/dashboard">
                     <Dashboard />
-                </Route>
+                </AuthRoute>
                 <Route path="/">
                     <Home />
                 </Route>
             </Switch>
         </StyledContainer>
+      }
       </Router>
   );
 }
 
-export default App;
+const mapStateToProps = ({session}) => ({
+    checked: session.checked
+})
+
+export default connect(mapStateToProps)(App);

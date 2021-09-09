@@ -6,11 +6,16 @@ import {
     StyledButton,
     ButtonGroup,
     StyledFormArea,
-    colors
+    colors, ExtraText
 } from "../components/Styles";
 import Logo from './../assets/logo.png'
+import {connect} from "react-redux"
+import {logoutUser} from "../auth/actions/userAction";
+import {useHistory} from "react-router-dom"
 
-const Dashboard = () => {
+const Dashboard = ({logoutUser , user}) => {
+
+    const history = useHistory()
     return (
         <div>
             <div style={{
@@ -25,21 +30,27 @@ const Dashboard = () => {
             }} >
                 <Avatar image={Logo} />
             </div>
-
             <StyledFormArea bg={colors.dark2} >
                 <StyledTitle size={65} >
-                    Welcome , User
+                    Welcome , {user.name}
                 </StyledTitle>
                 <StyledSubtitle size={27} >
-                    React Login System with Redux, Formik | Backend API Connection
+                    | React Login System with Redux, Formik |
                 </StyledSubtitle>
+                <ExtraText color={colors.light1}>{user.email}</ExtraText>
+                <ExtraText color={colors.light1}>
+                    {new Date(user.dateOfBirth).toLocaleDateString()}
+                </ExtraText>
                 <ButtonGroup>
-                    <StyledButton to="#" >Logout</StyledButton>
+                    <StyledButton to="#" onClick={() => logoutUser(history)}>Logout</StyledButton>
                 </ButtonGroup>
             </StyledFormArea>
-
         </div>
     )
 }
 
-export default Dashboard
+const mapStateToProps = ({session}) => ({
+    user: session.user
+})
+
+export default connect(mapStateToProps,{logoutUser})(Dashboard)
